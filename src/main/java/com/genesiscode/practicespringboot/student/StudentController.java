@@ -32,14 +32,16 @@ public class StudentController {
     }
 
     @DeleteMapping(path = "/{studentId}")
-    public void deleteStudent(@PathVariable("studentId") Long id) {
+    public ResponseEntity<?> deleteStudent(@PathVariable("studentId") Long id) {
         studentService.deleteStudent(id);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping(path = "{studentId}")
-    public void updateStudent(@PathVariable("studentId") Long id,
-                              @RequestParam(required = false) String name,
-                              @RequestParam(required = false) String email) {
-        studentService.updateStudent(id, name, email);
+    public ResponseEntity<StudentResponseDto> updateStudent(@PathVariable("studentId") Long id,
+                                                            @RequestParam(required = false) String name,
+                                                            @RequestParam(required = false) String email) {
+        StudentResponseDto studentResponseDto = studentService.updateStudent(id, name, email);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(studentResponseDto);
     }
 }
