@@ -1,7 +1,9 @@
-package com.genesiscode.practicespringboot.student;
+package com.genesiscode.practicespringboot.service;
 
+import com.genesiscode.practicespringboot.domain.Student;
 import com.genesiscode.practicespringboot.dto.StudentCreateDto;
 import com.genesiscode.practicespringboot.dto.StudentResponseDto;
+import com.genesiscode.practicespringboot.repository.StudentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

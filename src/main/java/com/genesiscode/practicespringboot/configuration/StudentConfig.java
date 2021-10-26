@@ -1,5 +1,7 @@
-package com.genesiscode.practicespringboot.student;
+package com.genesiscode.practicespringboot.configuration;
 
+import com.genesiscode.practicespringboot.domain.Student;
+import com.genesiscode.practicespringboot.repository.StudentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

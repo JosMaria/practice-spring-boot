@@ -1,7 +1,8 @@
-package com.genesiscode.practicespringboot.student;
+package com.genesiscode.practicespringboot.controller;
 
 import com.genesiscode.practicespringboot.dto.StudentCreateDto;
 import com.genesiscode.practicespringboot.dto.StudentResponseDto;
+import com.genesiscode.practicespringboot.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

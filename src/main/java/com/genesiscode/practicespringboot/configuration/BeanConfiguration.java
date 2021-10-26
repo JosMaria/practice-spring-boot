@@ -1,7 +1,7 @@
 package com.genesiscode.practicespringboot.configuration;
 
 import com.genesiscode.practicespringboot.dto.StudentCreateDto;
-import com.genesiscode.practicespringboot.student.Student;
+import com.genesiscode.practicespringboot.domain.Student;
 import com.genesiscode.practicespringboot.dto.StudentResponseDto;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;

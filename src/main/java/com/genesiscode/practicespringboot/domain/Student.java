@@ -1,4 +1,4 @@
-package com.genesiscode.practicespringboot.student;
+package com.genesiscode.practicespringboot.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
