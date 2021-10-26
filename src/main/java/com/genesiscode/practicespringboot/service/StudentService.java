@@ -3,6 +3,7 @@ package com.genesiscode.practicespringboot.service;
 import com.genesiscode.practicespringboot.domain.Student;
 import com.genesiscode.practicespringboot.dto.StudentCreateDto;
 import com.genesiscode.practicespringboot.dto.StudentResponseDto;
+import com.genesiscode.practicespringboot.exceptions.EmailAlreadyExistsException;
 import com.genesiscode.practicespringboot.repository.StudentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class StudentService {
         //Verify if email exists
         Optional<Student> studentOptional = studentRepository.findStudentByEmail(studentCreateDto.getEmail());
         if (studentOptional.isPresent()) {
-            throw new IllegalStateException("email taken");
+            throw new EmailAlreadyExistsException("email taken");
         }
 
         // Mapping the student to be persisted.
