@@ -12,6 +12,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +23,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Error> handleEmailAlreadyExists(EmailAlreadyExistsException exception) {
         Error error = new ErrorResponse(LocalDateTime.now(), exception.getMessage(),
                                         exception.getClass(), HttpStatus.PRECONDITION_REQUIRED);
+        return new ResponseEntity<>(error, error.getHttpStatus());
+    }
+
+    @ExceptionHandler(value = {DateTimeParseException.class})
+    public ResponseEntity<Error> handleDateTimeParse(DateTimeParseException exception) {
+        ErrorResponse error = new ErrorResponse(LocalDateTime.now(), exception.getMessage(),
+                                                exception.getClass(), HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(error, error.getHttpStatus());
     }
 

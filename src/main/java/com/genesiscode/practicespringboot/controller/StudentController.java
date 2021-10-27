@@ -9,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.PastOrPresent;
+import java.time.LocalDate;
 import java.util.Collection;
 
 @RestController
-@RequestMapping(path = "api/v1/student")
+@RequestMapping(path = "api/v1/students")
 public class StudentController {
 
     private final StudentService studentService;
@@ -33,17 +35,25 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(studentResponseDto);
     }
 
-    @DeleteMapping(path = "/{studentId}")
-    public ResponseEntity<?> deleteStudent(@PathVariable("studentId") Long id) {
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<?> deleteStudent(@PathVariable("id") Long id) {
         studentService.deleteStudent(id);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(path = "{studentId}")
-    public ResponseEntity<StudentResponseDto> updateStudent(@PathVariable("studentId") Long id,
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<StudentResponseDto> updateStudent(@PathVariable("id") Long id,
                                                             @RequestParam(required = false) String name,
                                                             @RequestParam(required = false) String email) {
         StudentResponseDto studentResponseDto = studentService.updateStudent(id, name, email);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(studentResponseDto);
+    }
+
+    @GetMapping(path = "/date")
+    public ResponseEntity<Collection<StudentResponseDto>> findByDobBetween(@PastOrPresent @RequestParam String startDate,
+                                                                           @PastOrPresent @RequestParam String endDate) {
+        Collection<StudentResponseDto> studentsResponse =
+                studentService.findByDobBetween(LocalDate.parse(startDate), LocalDate.parse(endDate));
+        return ResponseEntity.ok(studentsResponse);
     }
 }
