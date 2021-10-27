@@ -1,10 +1,15 @@
 package com.genesiscode.practicespringboot.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 public class StudentCreateDto {
 
+    @NotBlank(message = "Name is mandatory")
     private String name;
+
+    @Email
     private String email;
     private LocalDate birth;
 

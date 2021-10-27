@@ -1,4 +1,4 @@
-package com.genesiscode.practicespringboot.exceptions;
+package com.genesiscode.practicespringboot.problems.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
