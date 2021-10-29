@@ -26,7 +26,7 @@ public class StudentController {
 
     @GetMapping
     public ResponseEntity<Collection<StudentResponseDto>> getStudents() {
-        return ResponseEntity.ok(studentService.getStudents());
+        return ResponseEntity.ok().body(studentService.getStudents());
     }
 
     @PostMapping
@@ -54,6 +54,6 @@ public class StudentController {
                                                                            @PastOrPresent @RequestParam String endDate) {
         Collection<StudentResponseDto> studentsResponse =
                 studentService.findByDobBetween(LocalDate.parse(startDate), LocalDate.parse(endDate));
-        return ResponseEntity.ok(studentsResponse);
+        return ResponseEntity.ok().body(studentsResponse);
     }
 }

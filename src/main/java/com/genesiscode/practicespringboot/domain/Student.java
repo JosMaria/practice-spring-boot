@@ -3,6 +3,7 @@ package com.genesiscode.practicespringboot.domain;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Objects;
 
 @Entity
 @Table
@@ -14,7 +15,10 @@ public class Student {
     private Long id;
 
     private String name;
+
+    @Column(unique = true)
     private String email;
+
     private LocalDate dob;
 
     @Transient
