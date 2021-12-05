@@ -3,7 +3,6 @@ package com.genesiscode.practicespringboot.domain;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Objects;
 
 @Entity
 @Table
@@ -82,13 +81,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", dob=" + dob +
-                ", age=" + age +
-                '}';
+        return String.format("Student {id=%s, name=%s, email=%s, dob=%s, age=%s}", id, name, email, dob, age);
     }
 }
 

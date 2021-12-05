@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 @RestController
-@RequestMapping(path = "api/v1/students")
+@RequestMapping(path = "/api/v1/students")
 public class StudentController {
 
     private final StudentService studentService;

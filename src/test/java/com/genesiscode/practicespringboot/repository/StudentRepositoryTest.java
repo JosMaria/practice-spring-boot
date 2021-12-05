@@ -1,10 +1,12 @@
 package com.genesiscode.practicespringboot.repository;
 
 import com.genesiscode.practicespringboot.domain.Student;
+import com.genesiscode.practicespringboot.mockdata.MockData;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Collection;
@@ -22,13 +24,13 @@ class StudentRepositoryTest {
     private StudentRepository underTest;
 
     @BeforeEach
-    void setUp() {
-        loadData();
+    void setUp() throws IOException {
+        getStudents();
     }
 
     @Nested
     @DisplayName("Find by email Test")
-    class FindByEmail {
+    class FindByEmailTest {
 
         @Test
         @DisplayName("Find by email exists")
@@ -144,26 +146,7 @@ class StudentRepositoryTest {
         underTest.deleteAll();
     }
 
-    private void loadData() {
-        Student jose_maria = new Student("jose maria", "josmariaguilar@gmail.com", LocalDate.of(1998, Month.JANUARY, 17));
-        Student darleen = new Student("darleen", "darleenmariana@gmail.com", LocalDate.of(2003, Month.AUGUST, 1));
-        Student carlos = new Student("carlos", "carlos@gmail.com", LocalDate.now());
-        Student jason = new Student("jason", "jason@gmail.com", LocalDate.now());
-        Student sara = new Student("sara", "sara@gmail.com", LocalDate.now());
-        Student jimena = new Student("jimena", "jimena@gmail.com", LocalDate.now());
-        Student esther = new Student("esther", "esther@gmail.com", LocalDate.now());
-        Student paola = new Student("paola", "paola@gmail.com", LocalDate.now());
-        Student dorian = new Student("dorian", "dorian@gmail.com", LocalDate.now());
-        Student joana = new Student("joana", "joana@gmail.com", LocalDate.now());
-        Student rudy = new Student("rudy", "rudy@gmail.com", LocalDate.now());
-        Student edwin = new Student("edwin", "edwin@gmail.com", LocalDate.now());
-        Student denilson = new Student("denilson", "denilson@gmail.com", LocalDate.now());
-        Student jesus = new Student("jesus", "jesus@gmail.com", LocalDate.now());
-        Student karen = new Student("karen", "karen@gmail.com", LocalDate.now());
-        Student genesis = new Student("genesis", "genesis@gmail.com", LocalDate.now());
-        Student sandra = new Student("sandra", "sandra@gmail.com", LocalDate.now());
-
-        underTest.saveAll(List.of(jose_maria, darleen, carlos, jason, sara, jimena, esther,
-                paola, dorian, joana, rudy, edwin, denilson, jesus, karen, genesis, sandra));
+    private void getStudents() throws IOException {
+        underTest.saveAll(MockData.getStudents());
     }
 }

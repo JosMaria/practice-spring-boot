@@ -6,8 +6,11 @@ import com.genesiscode.practicespringboot.dto.StudentResponseDto;
 import com.genesiscode.practicespringboot.problems.exceptions.EmailAlreadyExistsException;
 import com.genesiscode.practicespringboot.repository.StudentRepository;
 import com.genesiscode.practicespringboot.service.StudentService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -18,22 +21,26 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
     private final ModelMapper studentMapper;
 
-    @Autowired
-    public StudentServiceImpl(StudentRepository studentRepository, ModelMapper studentMapper) {
-        this.studentRepository = studentRepository;
-        this.studentMapper = studentMapper;
-    }
-
     @Override
     public List<StudentResponseDto> getStudents() {
         return studentRepository.findAll()
                 .stream()
+                .map(student -> studentMapper.map(student, StudentResponseDto.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<StudentResponseDto> getAllStudentsPaginated(int numberPage, int sizePage) {
+        Pageable of = PageRequest.of(numberPage, sizePage);
+        Page<Student> pageStudent = studentRepository.findAll(of);
+        return pageStudent.stream()
                 .map(student -> studentMapper.map(student, StudentResponseDto.class))
                 .collect(Collectors.toList());
     }
